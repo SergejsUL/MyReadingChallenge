@@ -53,13 +53,17 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder bookViewHolder, int i) {
+        DocumentSnapshot ds = mBooksSnapshots.get(i);
+        String title = (String)ds.get(Constants.BOOK_TITLE);
+        String author=(String)ds.get(Constants.BOOK_AUTHOR);
+
+        bookViewHolder.mTitleTextView.setText(title);
+        bookViewHolder.mAuthorTextView.setText(author);
 
     }
 
     @Override
-    public int getItemCount() {
-        return 0;
-    }
+    public int getItemCount() {return mBooksSnapshots.size();}
 
     class BookViewHolder extends RecyclerView.ViewHolder{
         private TextView mTitleTextView;
