@@ -9,11 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +39,18 @@ public class MainActivity extends AppCompatActivity {
         BookViewAdapter bookViewAdapter = new BookViewAdapter();
         recyclerView.setAdapter(bookViewAdapter);
         //END of recycler with list of books
+
+
+        // Authentication tutorial
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        auth.signInAnonymously();
+        if(currentUser == null){
+            Log.d(Constants.TAG,"There is no user.");
+        }else{
+            Log.d(Constants.TAG,"There is user logged in.");
+        }
+
     }
 
     @Override
@@ -74,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         String bookAuthor = input_author.getText().toString();
                         String bookTitle = input_title.getText().toString();
                         //TODO : get these ids from Firebase.
-                        String userID = "user1";
+                        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         BookItem mBook = new BookItem(userID,bookTitle,bookAuthor);
                         mBookShelf.addBookToLibrary(mBook);
 

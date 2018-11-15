@@ -1,5 +1,8 @@
 package ie.ul.serge.myreadingchallenge;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Date;
 import java.util.HashMap;
 
