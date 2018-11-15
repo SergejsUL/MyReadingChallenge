@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">My Reading Challenge</string>
     <string name="action_settings">Settings</string>
+    <string name="add_new_book_manu_item">add_new_book_manu_item</string>
+    <string name="enter_book_title">enter_book_title</string>
+    <string name="enter_book_author">enter_book_author</string>
 </resources>

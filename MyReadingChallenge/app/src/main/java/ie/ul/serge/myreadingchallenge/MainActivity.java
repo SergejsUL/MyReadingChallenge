@@ -1,8 +1,10 @@
 package ie.ul.serge.myreadingchallenge;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+   BookShelf mBookShelf = new BookShelf();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,23 +26,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        //Use recyclerview to get list of the books
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
         BookViewAdapter bookViewAdapter = new BookViewAdapter();
         recyclerView.setAdapter(bookViewAdapter);
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-            }
-        });
+        //END of recycler with list of books
     }
 
     @Override
@@ -48,16 +46,43 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()){
+            case R.id.action_add_new_book:
+                editBook();
+                Toast.makeText(this,"menu pressed",Toast.LENGTH_LONG).show();
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.action_settings:
+                //getCurrentBook();
+                Toast.makeText(this,"settingsppressed",Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //START of edit book method that is used to put new bookd to the shelf or edit them
+    private void editBook() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.edit_book,null, false);
+        builder.setView(view);
+        final EditText input_title = view.findViewById(R.id.input_title);
+        final EditText input_author = view.findViewById(R.id.input_author);
+
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String bookAuthor = input_author.getText().toString();
+                        String bookTitle = input_title.getText().toString();
+                        //TODO : get these ids from Firebase.
+                        String userID = "user1";
+                        BookItem mBook = new BookItem(userID,bookTitle,bookAuthor);
+                        mBookShelf.addBookToLibrary(mBook);
+
+
+                    }
+                });
+        builder.create().show();
+
+
     }
 }

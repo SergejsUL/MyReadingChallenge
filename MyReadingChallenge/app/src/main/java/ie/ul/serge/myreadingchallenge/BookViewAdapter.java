@@ -65,6 +65,7 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
     @Override
     public int getItemCount() {return mBooksSnapshots.size();}
 
+
     class BookViewHolder extends RecyclerView.ViewHolder{
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
