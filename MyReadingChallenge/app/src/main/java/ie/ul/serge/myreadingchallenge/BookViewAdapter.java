@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -26,7 +27,11 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
     public BookViewAdapter(){
         CollectionReference booklistRef = FirebaseFirestore.getInstance()
         .collection(Constants.BOOK_COLLECTION);
-        booklistRef.orderBy(Constants.CREATED_KEY, Query.Direction.DESCENDING).limit(50)
+
+        //booklistRef.orderBy(Constants.KEY_CREATED, Query.Direction.DESCENDING).limit(50)
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        booklistRef.whereEqualTo(Constants.KEY_USERID,uid)
+               .orderBy(Constants.KEY_CREATED, Query.Direction.DESCENDING).limit(50)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(QuerySnapshot documentSnapshots,
@@ -35,6 +40,7 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
                             Log.w(Constants.TAG,"Listening failed");
                             return;
                         }
+
                         mBooksSnapshots = documentSnapshots.getDocuments();
                         notifyDataSetChanged();
                     }
@@ -54,8 +60,8 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder bookViewHolder, int i) {
         DocumentSnapshot ds = mBooksSnapshots.get(i);
-        String title = (String)ds.get(Constants.BOOK_TITLE);
-        String author=(String)ds.get(Constants.BOOK_AUTHOR);
+        String title = (String)ds.get(Constants.KEY_BOOK_TITLE);
+        String author=(String)ds.get(Constants.KEY_BOOK_AUTHOR);
 
         bookViewHolder.mTitleTextView.setText(title);
         bookViewHolder.mAuthorTextView.setText(author);
