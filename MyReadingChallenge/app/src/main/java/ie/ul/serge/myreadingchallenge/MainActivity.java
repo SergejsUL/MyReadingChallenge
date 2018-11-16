@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Authentication tutorial
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        auth.signInAnonymously();
-        if(currentUser == null){
-            Log.d(Constants.TAG,"There is no user.");
-        }else{
-            Log.d(Constants.TAG,"There is user logged in.");
-        }
+        // FirebaseAuth auth = FirebaseAuth.getInstance();
+//        FirebaseUser currentUser = auth.getCurrentUser();
+//        auth.signInAnonymously();
+//        if(currentUser == null){
+//            Log.d(Constants.TAG,"There is no user.");
+//        }else{
+//            Log.d(Constants.TAG,"There is user logged in.");
+//        }
 
     }
 
