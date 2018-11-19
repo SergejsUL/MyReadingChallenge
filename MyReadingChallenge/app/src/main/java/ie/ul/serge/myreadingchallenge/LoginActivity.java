@@ -1,5 +1,6 @@
 package ie.ul.serge.myreadingchallenge;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,9 +42,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
 
                         }else{
-                            Toast.makeText(LoginActivity.this,"Login failed!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Sign up failed!",Toast.LENGTH_SHORT).show();
                         }
 
                     }
