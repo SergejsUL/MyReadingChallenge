@@ -71,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 //getCurrentBook();
                 Toast.makeText(this,"settingsppressed",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.signout:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

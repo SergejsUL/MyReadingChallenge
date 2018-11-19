@@ -12,4 +12,5 @@
     <string name="invalid_email">This email address is invalid</string>
     <string name="invalid_password">Password is too short</string>
     <string name="login_screen_title">login</string>
+    <string name="sign_out">Sign out</string>
 </resources>
