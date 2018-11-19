@@ -26,8 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     mAuth=FirebaseAuth.getInstance();
 
     // CHECK IF USER IS ALREADY LOGGED IN AND SKIP LOGIN.
-        if (mAuth !=null){
-            Intent intent = new Intent(this,MainActivity.class);
+        if (mAuth.getCurrentUser() !=null){
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }
 
@@ -38,28 +38,31 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     public void handleSignUp(View view){
-    String email = mEmailEditText.getText().toString();
-    String password = mPasswordEditText.getText().toString();
-    if(email.length()<5||!email.contains("@")){
-      mPasswordEditText.setError(getString(R.string.invalid_email));
-    }else if (password.length()<6){
-        mPasswordEditText.setError(getString(R.string.invalid_password));
-    } else {
-        mAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            startActivity(intent);
 
-                        }else{
-                            Toast.makeText(LoginActivity.this,"Sign up failed!",Toast.LENGTH_SHORT).show();
+        String email = mEmailEditText.getText().toString();
+        String password = mPasswordEditText.getText().toString();
+        if(email.length()<5||!email.contains("@")){
+            mPasswordEditText.setError(getString(R.string.invalid_email));
+        }else if (password.length()<6){
+            mPasswordEditText.setError(getString(R.string.invalid_password));
+        } else {
+            mAuth.createUserWithEmailAndPassword(email,password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
+
+                            }else{
+                                Toast.makeText(LoginActivity.this,"Sign up failed!",Toast.LENGTH_SHORT).show();
+                            }
+
                         }
-
-                    }
-                });
-    }
+                    });
+        }
 
     }
+
+
 }
