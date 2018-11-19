@@ -35,9 +35,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void handleSignIn(View view){
-
+        loginAction(true);
     }
     public void handleSignUp(View view){
+        loginAction(false);
+    }
+
+    public void loginAction(boolean isSignIn)
+    {
 
         String email = mEmailEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
@@ -45,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
             mPasswordEditText.setError(getString(R.string.invalid_email));
         }else if (password.length()<6){
             mPasswordEditText.setError(getString(R.string.invalid_password));
-        } else {
-            mAuth.createUserWithEmailAndPassword(email,password)
+        } else if (isSignIn){
+            mAuth.signInWithEmailAndPassword(email,password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -55,14 +60,28 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent);
 
                             }else{
-                                Toast.makeText(LoginActivity.this,"Sign up failed!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,"Sign in failed!",Toast.LENGTH_SHORT).show();
                             }
 
                         }
                     });
-        }
+        }else {
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
 
+                        }else{
+                            Toast.makeText(LoginActivity.this,"Sign up failed!",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
     }
 
+    }
 
 }
