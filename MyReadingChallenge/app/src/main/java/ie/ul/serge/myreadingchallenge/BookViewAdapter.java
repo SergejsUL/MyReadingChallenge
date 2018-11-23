@@ -1,6 +1,7 @@
 package ie.ul.serge.myreadingchallenge;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -76,10 +77,23 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
 
-        public BookViewHolder(@NonNull View itemView) {
+        public BookViewHolder(@NonNull final View itemView) {
             super(itemView);
             mTitleTextView = itemView.findViewById(R.id.itemview_Title);
             mAuthorTextView= itemView.findViewById(R.id.itemview_Author);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DocumentSnapshot ds = mBooksSnapshots.get(getAdapterPosition());
+                    Context context = itemView.getContext();
+                    Intent intent = new Intent(context,BookDetail.class);
+                    intent.putExtra(Constants.EXTRA_DOC_ID,ds.getId());
+                    context.startActivity(intent);
+
+
+                }
+            });
 
         }
     }

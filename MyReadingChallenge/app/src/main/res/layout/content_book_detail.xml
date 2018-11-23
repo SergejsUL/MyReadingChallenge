@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".BookDetail"
+    tools:showIn="@layout/activity_book_detail">
+
+
+    <TextView
+        android:id="@+id/TextView_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Alice "
+        android:textColor="@android:color/black"
+        android:textSize="30dp"
+        />
+    <TextView
+        android:id="@+id/TextView_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView_title"
+        android:layout_margin="10dp"
+        android:text="Lewis Carroll"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/TextView_pages_read_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView_author"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/book_image"
+        android:text="Pages Read:"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/TextView_pages_read"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TextView_pages_read_tag"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/book_image"
+        android:text="10"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="40dp"
+        />
+
+    <ImageView
+        android:id="@+id/book_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/TextView_author"
+        android:layout_gravity="left"
+        android:src="@drawable/alice"
+
+        />
+
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/input_number_picker"
+        android:layout_below="@+id/book_image"
+        android:layout_centerHorizontal="true">
+
+
+
+    </NumberPicker>
+    <Button
+        android:id="@+id/btn_add_pages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_number_picker"
+        android:layout_centerHorizontal="true"
+        android:text="Add pages"
+        />
+
+    />
+</RelativeLayout>

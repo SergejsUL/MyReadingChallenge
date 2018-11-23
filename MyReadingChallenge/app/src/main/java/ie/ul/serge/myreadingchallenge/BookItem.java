@@ -24,6 +24,7 @@ public BookItem(String userID, String title, String author){
                 this.put(Constants.KEY_USERID,userID);
                 this.put(Constants.KEY_BOOK_TITLE,title);
                 this.put(Constants.KEY_BOOK_AUTHOR,author);
+                this.put(Constants.KEY_BOOK_PAGES,0);
                 this.put(Constants.KEY_CREATED,new Date());
 
                 }
