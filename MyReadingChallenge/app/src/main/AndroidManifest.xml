@@ -12,7 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/login_screen_title"
@@ -26,6 +26,10 @@
         <activity
             android:name=".BookDetail"
             android:label="@string/title_activity_book_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChellengeActivity"
+            android:label="@string/title_activity_chellenge"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

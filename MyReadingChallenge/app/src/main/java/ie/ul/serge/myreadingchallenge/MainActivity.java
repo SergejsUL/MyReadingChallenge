@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.action_add_new_book:
                 editBook();
-                Toast.makeText(this,"menu pressed",Toast.LENGTH_LONG).show();
+
                 return true;
 
             case R.id.action_settings:
-                //getCurrentBook();
+
                 Toast.makeText(this,"settingsppressed",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.signout:
