@@ -1,6 +1,8 @@
 package ie.ul.serge.myreadingchallenge;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.okhttp.Challenge;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +54,19 @@ public class MainActivity extends AppCompatActivity {
 //            Log.d(Constants.TAG,"There is user logged in.");
 //        }
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Context context = view.getContext();
+                Intent intent = new Intent(context,ChellengeActivity.class);
+                context.startActivity(intent);
+
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     @Override
@@ -106,4 +122,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }
