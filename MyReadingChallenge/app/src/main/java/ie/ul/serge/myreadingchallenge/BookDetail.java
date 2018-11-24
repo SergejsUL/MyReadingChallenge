@@ -104,9 +104,14 @@ public class BookDetail extends AppCompatActivity {
                 mUserPages+=mPagestoAdd;
                 addPagestoBook();
                 addPagesToChallenge();
+                addPagestoUser();
+                
 
             }
         });
+    }
+
+    private void addPagestoUser() {
     }
 
     private void addPagestoBook() {
