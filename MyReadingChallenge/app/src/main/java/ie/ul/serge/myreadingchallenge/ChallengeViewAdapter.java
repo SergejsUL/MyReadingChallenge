@@ -26,11 +26,12 @@ public class ChallengeViewAdapter extends RecyclerView.Adapter<ChallengeViewAdap
 
 
     private List<DocumentSnapshot> mUserSnapshots = new ArrayList<>();
+    private List<DocumentSnapshot> mPagesSnapshots = new ArrayList<>();
+    private FirebaseFirestore db;
 
 
         public ChallengeViewAdapter(){
-        CollectionReference mUsersRef = FirebaseFirestore.getInstance()
-                .collection(Constants.USERS_COLLECTION);
+        CollectionReference mUsersRef = db.collection(Constants.USERS_COLLECTION);
         mUsersRef.orderBy(Constants.KEY_BOOK_PAGES,Query.Direction.DESCENDING).limit(50)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override

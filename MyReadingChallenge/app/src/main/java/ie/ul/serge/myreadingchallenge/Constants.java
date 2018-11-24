@@ -3,6 +3,7 @@ package ie.ul.serge.myreadingchallenge;
 public class Constants {
     public static final String BOOK_COLLECTION = "books";
     public static final String USERS_COLLECTION = "users";
+    public static final String PAGES_COLLECTION = "pages_collection";
 
 
 
