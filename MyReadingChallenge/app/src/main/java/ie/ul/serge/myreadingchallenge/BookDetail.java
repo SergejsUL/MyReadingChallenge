@@ -32,7 +32,7 @@ public class BookDetail extends AppCompatActivity {
     private long mBookPages,mPagestoAdd;
     private long mUserPages;
     private DocumentSnapshot mDocSnap,mUserDocSnap;
-    private DocumentReference mDocRef;
+    private DocumentReference mDocRef,mUserDocRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,23 @@ public class BookDetail extends AppCompatActivity {
             }
         });
 
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mUserDocRef = FirebaseFirestore.getInstance()
+                .collection(Constants.USERS_COLLECTION).document(uid);
+        mUserDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                if(e!=null){
+                    Toast.makeText(BookDetail.this,"ListeningFailed",Toast.LENGTH_LONG).show();
+                    Log.w(Constants.TAG,"Listening failed");
+                    return;
+                }
+                if(documentSnapshot.exists()){
+                    mUserDocSnap = documentSnapshot;
+                    mUserPages = (Long)mUserDocSnap.get(Constants.KEY_BOOK_PAGES);
+                }
+            }
+        });
        numberPicker();
     }
 
@@ -84,7 +101,7 @@ public class BookDetail extends AppCompatActivity {
                 mPagestoAdd = picker.getValue();
                 Date mDateRead = new Date();
                 mBookPages +=mPagestoAdd;
-
+                mUserPages+=mPagestoAdd;
                 addPagestoBook();
                 addPagesToChallenge();
 
@@ -101,27 +118,10 @@ public class BookDetail extends AppCompatActivity {
     }
 
     private void addPagesToChallenge() {
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DocumentReference userDocRef = FirebaseFirestore.getInstance()
-                .collection(Constants.USERS_COLLECTION).document(uid);
-        userDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                if(e!=null){
-                    Toast.makeText(BookDetail.this,"ListeningFailed",Toast.LENGTH_LONG).show();
-                    Log.w(Constants.TAG,"Listening failed");
-                    return;
-                }
-                if(documentSnapshot.exists()){
-                    mUserDocSnap = documentSnapshot;
-                    mUserPages = (Long)mUserDocSnap.get(Constants.KEY_BOOK_PAGES);
-                }
-            }
-        });
-
         Map<String, Object> up = new HashMap<>();
-        up.put(Constants.KEY_BOOK_PAGES,mUserPages+mPagestoAdd);
-        userDocRef.update(up);
+        up.put(Constants.KEY_BOOK_PAGES,mUserPages);
+        mUserDocRef.update(up);
+
     }
 
 }

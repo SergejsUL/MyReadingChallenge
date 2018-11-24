@@ -12,6 +12,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText mEmailEditText;
@@ -71,6 +75,18 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                           String uid= mAuth.getUid();
+
+                            CollectionReference userColRef = FirebaseFirestore.getInstance()
+                                    .collection(Constants.USERS_COLLECTION);
+                            HashMap<String, Object> user = new HashMap<>();
+                            String name = mAuth.getCurrentUser().getEmail();
+                            user.put(Constants.KEY_USERNAME,name);
+                            user.put(Constants.KEY_BOOK_PAGES,0);
+                            user.put(Constants.KEY_USERID,uid);
+                            userColRef.document(uid).set(user);
+
+
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);
 
