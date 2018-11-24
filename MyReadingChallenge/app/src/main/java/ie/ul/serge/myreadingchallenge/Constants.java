@@ -9,6 +9,7 @@ public class Constants {
     public static final String TAG="BK";
 
     public static final String	KEY_USERID = "userID";
+    public static final String	KEY_USERNAME = "name";
     public static final String EXTRA_DOC_ID = "document_id";
 
     public static final String KEY_CREATED="created";

@@ -15,6 +15,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -28,8 +29,10 @@ public class ChallengeViewAdapter extends RecyclerView.Adapter<ChallengeViewAdap
 
 
         public ChallengeViewAdapter(){
-        CollectionReference mUsersRef = FirebaseFirestore.getInstance().collection(Constants.USERS_COLLECTION);
-        mUsersRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        CollectionReference mUsersRef = FirebaseFirestore.getInstance()
+                .collection(Constants.USERS_COLLECTION);
+        mUsersRef.orderBy(Constants.KEY_BOOK_PAGES,Query.Direction.DESCENDING).limit(50)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                 if(e!=null){
@@ -58,8 +61,10 @@ public class ChallengeViewAdapter extends RecyclerView.Adapter<ChallengeViewAdap
     @Override
     public void onBindViewHolder(@NonNull ChallengeViewHolder challengeViewHolder, int i) {
         DocumentSnapshot ds = mUserSnapshots.get(i);
-        String user = (String)ds.get(Constants.KEY_USERID);
+        String user = (String)ds.get(Constants.KEY_USERNAME);
+        Long numberPages = (Long)ds.get(Constants.KEY_BOOK_PAGES);
         challengeViewHolder.mUserTextView.setText(user);
+        challengeViewHolder.mNumPageTextView.setText(numberPages+"");
 
     }
 
