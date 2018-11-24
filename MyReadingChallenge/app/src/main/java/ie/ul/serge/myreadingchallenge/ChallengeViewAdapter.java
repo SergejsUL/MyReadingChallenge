@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -26,13 +29,14 @@ public class ChallengeViewAdapter extends RecyclerView.Adapter<ChallengeViewAdap
 
 
     private List<DocumentSnapshot> mUserSnapshots = new ArrayList<>();
-    private List<DocumentSnapshot> mPagesSnapshots = new ArrayList<>();
     private FirebaseFirestore db;
+    CollectionReference mUsersRef;
 
 
         public ChallengeViewAdapter(){
-        CollectionReference mUsersRef = db.collection(Constants.USERS_COLLECTION);
-        mUsersRef.orderBy(Constants.KEY_BOOK_PAGES,Query.Direction.DESCENDING).limit(50)
+            db=FirebaseFirestore.getInstance();
+            mUsersRef = db.collection(Constants.USERS_COLLECTION);
+            mUsersRef.orderBy(Constants.KEY_BOOK_PAGES,Query.Direction.DESCENDING).limit(50)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
@@ -62,10 +66,12 @@ public class ChallengeViewAdapter extends RecyclerView.Adapter<ChallengeViewAdap
     @Override
     public void onBindViewHolder(@NonNull ChallengeViewHolder challengeViewHolder, int i) {
         DocumentSnapshot ds = mUserSnapshots.get(i);
+
         String user = (String)ds.get(Constants.KEY_USERNAME);
         Long numberPages = (Long)ds.get(Constants.KEY_BOOK_PAGES);
         challengeViewHolder.mUserTextView.setText(user);
         challengeViewHolder.mNumPageTextView.setText(numberPages+"");
+
 
     }
 
@@ -85,4 +91,7 @@ public class ChallengeViewAdapter extends RecyclerView.Adapter<ChallengeViewAdap
 
         }
     }
+
+
+
 }
