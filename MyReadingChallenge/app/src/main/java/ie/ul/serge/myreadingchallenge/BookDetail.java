@@ -1,9 +1,9 @@
 package ie.ul.serge.myreadingchallenge;
 
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,7 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -26,8 +29,9 @@ public class BookDetail extends AppCompatActivity {
 
     private TextView mTitleTextView,mAuthorTextView,mPagesTextView;
     private Button addBtn;
-    private long mPages, mPagestoAdd;
-    private DocumentSnapshot mDocSnap;
+    private long mBookPages,mPagestoAdd;
+    private long mUserPages;
+    private DocumentSnapshot mDocSnap,mUserDocSnap;
     private DocumentReference mDocRef;
 
     @Override
@@ -58,27 +62,14 @@ public class BookDetail extends AppCompatActivity {
                   mTitleTextView.setText((String)mDocSnap.get(Constants.KEY_BOOK_TITLE));
                   mAuthorTextView.setText((String)mDocSnap.get(Constants.KEY_BOOK_AUTHOR));
 
-                  mPages = (Long) mDocSnap.get(Constants.KEY_BOOK_PAGES);
-                  mPagesTextView.setText(mPages +"");
+                  mBookPages = (Long) mDocSnap.get(Constants.KEY_BOOK_PAGES);
+                  mPagesTextView.setText(mBookPages +"");
 
               }
             }
         });
 
-
-
-
-
-
-
-
-
        numberPicker();
-
-
-
-
-
     }
 
     private void numberPicker() {
@@ -92,22 +83,45 @@ public class BookDetail extends AppCompatActivity {
             public void onClick(View v) {
                 mPagestoAdd = picker.getValue();
                 Date mDateRead = new Date();
-                mPages+=mPagestoAdd;
+                mBookPages +=mPagestoAdd;
 
                 addPagestoBook();
+                addPagesToChallenge();
+
             }
         });
     }
 
     private void addPagestoBook() {
         Map<String, Object> bk = new HashMap<>();
-        bk.put(Constants.KEY_BOOK_PAGES,mPages);
+        bk.put(Constants.KEY_BOOK_PAGES, mBookPages);
         bk.put(Constants.KEY_CREATED,new Date());
         mDocRef.update(bk);
 
-
-
     }
 
+    private void addPagesToChallenge() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DocumentReference userDocRef = FirebaseFirestore.getInstance()
+                .collection(Constants.USERS_COLLECTION).document(uid);
+        userDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                if(e!=null){
+                    Toast.makeText(BookDetail.this,"ListeningFailed",Toast.LENGTH_LONG).show();
+                    Log.w(Constants.TAG,"Listening failed");
+                    return;
+                }
+                if(documentSnapshot.exists()){
+                    mUserDocSnap = documentSnapshot;
+                    mUserPages = (Long)mUserDocSnap.get(Constants.KEY_BOOK_PAGES);
+                }
+            }
+        });
+
+        Map<String, Object> up = new HashMap<>();
+        up.put(Constants.KEY_BOOK_PAGES,mUserPages+mPagestoAdd);
+        userDocRef.update(up);
+    }
 
 }

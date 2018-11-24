@@ -19,11 +19,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class ChallengeViewAdapter extends RecyclerView.Adapter<ChallengeViewAdapter.ChallengeViewHolder> {
 
 
     private List<DocumentSnapshot> mUserSnapshots = new ArrayList<>();
+
 
         public ChallengeViewAdapter(){
         CollectionReference mUsersRef = FirebaseFirestore.getInstance().collection(Constants.USERS_COLLECTION);
@@ -36,11 +38,14 @@ public class ChallengeViewAdapter extends RecyclerView.Adapter<ChallengeViewAdap
                 }
 
                 mUserSnapshots = documentSnapshots.getDocuments();
+
                 notifyDataSetChanged();
             }
         });
 
     }
+
+
 
     @NonNull
     @Override
