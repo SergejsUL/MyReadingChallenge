@@ -33,6 +33,7 @@ public class BookDetail extends AppCompatActivity {
     private long mUserPages;
     private DocumentSnapshot mDocSnap,mUserDocSnap;
     private DocumentReference mDocRef,mUserDocRef;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,34 +46,34 @@ public class BookDetail extends AppCompatActivity {
         mAuthorTextView = findViewById(R.id.TextView_author);
         mPagesTextView= findViewById(R.id.TextView_pages_read);
 
+        db = FirebaseFirestore.getInstance();
+
         Intent receivedIntent = getIntent();
         String docID = receivedIntent.getStringExtra(Constants.EXTRA_DOC_ID);
 
-        mDocRef = FirebaseFirestore.getInstance()
-                .collection(Constants.BOOK_COLLECTION).document(docID);
-        mDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        mDocRef = db.collection(Constants.BOOK_COLLECTION).document(docID);
+        mDocRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-              if(e!=null){
-                  Log.w(Constants.TAG,"Listening failed");
-                  return;
-              }
-              if(documentSnapshot.exists()){
-                  mDocSnap = documentSnapshot;
-                  mTitleTextView.setText((String)mDocSnap.get(Constants.KEY_BOOK_TITLE));
-                  mAuthorTextView.setText((String)mDocSnap.get(Constants.KEY_BOOK_AUTHOR));
+                if(e!=null){
+                    Log.w(Constants.TAG,"Listening failed");
+                    return;
+                }
+                if(documentSnapshot.exists()){
+                    mDocSnap = documentSnapshot;
+                    mTitleTextView.setText((String)mDocSnap.get(Constants.KEY_BOOK_TITLE));
+                    mAuthorTextView.setText((String)mDocSnap.get(Constants.KEY_BOOK_AUTHOR));
 
-                  mBookPages = (Long) mDocSnap.get(Constants.KEY_BOOK_PAGES);
-                  mPagesTextView.setText(mBookPages +"");
+                    mBookPages = (Long) mDocSnap.get(Constants.KEY_BOOK_PAGES);
+                    mPagesTextView.setText(mBookPages +"");
 
-              }
+                }
             }
         });
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mUserDocRef = FirebaseFirestore.getInstance()
-                .collection(Constants.USERS_COLLECTION).document(uid);
-        mUserDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        mUserDocRef = db.collection(Constants.USERS_COLLECTION).document(uid);
+        mUserDocRef.addSnapshotListener(this,new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 if(e!=null){
@@ -86,7 +87,8 @@ public class BookDetail extends AppCompatActivity {
                 }
             }
         });
-       numberPicker();
+
+        numberPicker();
     }
 
     private void numberPicker() {
@@ -104,14 +106,19 @@ public class BookDetail extends AppCompatActivity {
                 mUserPages+=mPagestoAdd;
                 addPagestoBook();
                 addPagesToChallenge();
-                addPagestoUser();
-                
+                addPages();
 
             }
         });
     }
 
-    private void addPagestoUser() {
+    private void addPages() {
+        HashMap<String,Object>pg = new HashMap<>();
+        pg.put(Constants.KEY_BOOK_PAGES,mPagestoAdd);
+        pg.put(Constants.KEY_CREATED,new Date());
+        mUserDocRef.collection(Constants.PAGES_COLLECTION).add(pg);
+
+
     }
 
     private void addPagestoBook() {
