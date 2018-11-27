@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Use recyclerview to get list of the books
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         recyclerView.setHasFixedSize(true);
 
         BookViewAdapter bookViewAdapter = new BookViewAdapter();
