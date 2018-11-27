@@ -45,24 +45,27 @@ public class MainActivity extends AppCompatActivity {
         //END of recycler with list of books
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Context context = view.getContext();
-//                Intent intent = new Intent(context,ChellengeActivity.class);
-//                context.startActivity(intent);
-//            }
-//        });
+        // Authentication tutorial
+        // FirebaseAuth auth = FirebaseAuth.getInstance();
+//        FirebaseUser currentUser = auth.getCurrentUser();
+//        auth.signInAnonymously();
+//        if(currentUser == null){
+//            Log.d(Constants.TAG,"There is no user.");
+//        }else{
+//            Log.d(Constants.TAG,"There is user logged in.");
+//        }
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Context context = view.getContext();
-                Intent intent = new Intent(context,Main2Activity.class);
+                Intent intent = new Intent(context,ChellengeActivity.class);
                 context.startActivity(intent);
+
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
     }
