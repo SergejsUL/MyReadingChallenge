@@ -40,6 +40,7 @@ public class MyPagesActivity extends AppCompatActivity {
     private TextView mTextViewTodayPg;
     private TextView mTextViewWkPg;
     private TextView mTextViewMnthPg;
+    private TextView mReadTopBanner;
 
 
 
@@ -106,7 +107,12 @@ public class MyPagesActivity extends AppCompatActivity {
         mTextViewTodayPg = findViewById(R.id.read_day_textview);
         mTextViewWkPg = findViewById(R.id.read_week_textview);
         mTextViewMnthPg = findViewById(R.id.read_month_textview);
+        mReadTopBanner=findViewById(R.id.read_top_banner);
 
+        String bannerText = "Hello " + mAuth.getCurrentUser().getEmail()+". \nYou are mmaking great progress this year." +
+                "\nSee your reading stats below";
+
+        mReadTopBanner.setText(bannerText);
         mTextViewTodayPg.setText(mTodayPages+"");
         mTextViewWkPg.setText(mWeekPages+"");
         mTextViewMnthPg.setText(mMonthPages+"");
