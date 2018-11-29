@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.solver.widgets.Snapshot;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,11 +24,22 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.okhttp.Challenge;
+
+import java.util.ArrayList;
+import java.util.FormatFlagsConversionMismatchException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
    BookShelf mBookShelf = new BookShelf();
+    List<DocumentSnapshot> mUserPageList = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -35,16 +47,19 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_challenge:
                     Context context = MainActivity.this;
                     Intent intent = new Intent(context,ChellengeActivity.class);
                     context.startActivity(intent);
 
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_pages:
+                    Context context1 = MainActivity.this;
+                    Intent intent1 = new Intent(context1,MyPagesActivity.class);
+                    context1.startActivity(intent1);
 
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_me:
 
                     return true;
             }

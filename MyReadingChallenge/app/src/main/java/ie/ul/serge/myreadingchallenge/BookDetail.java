@@ -42,6 +42,8 @@ public class BookDetail extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         mTitleTextView = findViewById(R.id.TextView_title);
         mAuthorTextView = findViewById(R.id.TextView_author);
         mPagesTextView= findViewById(R.id.TextView_pages_read);
@@ -72,7 +74,10 @@ public class BookDetail extends AppCompatActivity {
         });
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
         mUserDocRef = db.collection(Constants.USERS_COLLECTION).document(uid);
+
         mUserDocRef.addSnapshotListener(this,new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {

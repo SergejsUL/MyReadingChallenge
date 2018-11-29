@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="daysPages">#ffcf40</color>
+    <color name="MonthsPages">#ff7c40</color>
+    <color name="TotalPages">#ff6940</color>
+    <color name="MyPagesBackground">#1e1b1a</color>
+    <color name="white">#ffffff</color>
+
 </resources>

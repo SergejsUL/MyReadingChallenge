@@ -31,6 +31,7 @@
             android:name=".ChellengeActivity"
             android:label="@string/title_activity_chellenge"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MyPagesActivity"></activity>
     </application>
 
 </manifest>
