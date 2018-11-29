@@ -32,12 +32,14 @@ public class MyPagesActivity extends AppCompatActivity {
     private Calendar mToday;
 
     long mTodayPages;
-
+    long mWeekPages;
     long mMonthPages;
 
-    private TextView mTodayPgTxt;
-    private TextView mWeekPgTxt;
-    private TextView mMonthPgTxt;
+
+
+    private TextView mTextViewTodayPg;
+    private TextView mTextViewWkPg;
+    private TextView mTextViewMnthPg;
 
 
 
@@ -55,7 +57,7 @@ public class MyPagesActivity extends AppCompatActivity {
         mWeekStart= new GregorianCalendar();
         mWeekStart.set(Calendar.DAY_OF_WEEK, mWeekStart.getFirstDayOfWeek());
         mToday = new GregorianCalendar();
-        mToday.setTime(new Date());
+        mToday.add(mToday.DATE,-1);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -69,31 +71,47 @@ public class MyPagesActivity extends AppCompatActivity {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                 if(e!=null){
-                    Toast.makeText(MyPagesActivity.this,"Could not connect",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyPagesActivity.this,"Could not connect to database",Toast.LENGTH_LONG).show();
                     return;
                 }
                 mUserPageList =  documentSnapshots.getDocuments();
-                getWeekPages();
+                getPages();
+                updateView();
             }
         });
 
     }
 
-    private void getWeekPages() {
-        long weekPages=0;
+    private void getPages() {
+
 
         for (DocumentSnapshot doc : mUserPageList) {
-
             Date docDate = (Date) doc.get(Constants.KEY_CREATED);
-            if (docDate.after(mWeekStart.getTime())) {
-                long docPage = (Long) doc.get(Constants.KEY_BOOK_PAGES);
-                weekPages += (Long) doc.get(Constants.KEY_BOOK_PAGES);
-            }
-//        if(docDate.before(mWeekStart.getTime())){
 
+            if(docDate.after(mToday.getTime())){
+                mTodayPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
+            }
+            if(docDate.after(mWeekStart.getTime())){
+                mWeekPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
+            }
+            if(docDate.after(mMonthStart.getTime())){
+                mMonthPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
+
+            }
         }
-        Toast.makeText(this, weekPages + "", Toast.LENGTH_LONG).show();
+
     }
+
+    private void updateView() {
+        mTextViewTodayPg = findViewById(R.id.read_day_textview);
+        mTextViewWkPg = findViewById(R.id.read_week_textview);
+        mTextViewMnthPg = findViewById(R.id.read_month_textview);
+
+        mTextViewTodayPg.setText(mTodayPages+"");
+        mTextViewWkPg.setText(mWeekPages+"");
+        mTextViewMnthPg.setText(mMonthPages+"");
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
