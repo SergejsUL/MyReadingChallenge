@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,9 +65,17 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
         DocumentSnapshot ds = mBooksSnapshots.get(i);
         String title = (String)ds.get(Constants.KEY_BOOK_TITLE);
         String author=(String)ds.get(Constants.KEY_BOOK_AUTHOR);
+        String url = (String)ds.get(Constants.KEY_BOOK_IMAGE_URL);
 
         bookViewHolder.mTitleTextView.setText(title);
         bookViewHolder.mAuthorTextView.setText(author);
+
+        //Load image picture from Firestore
+        Ion.with(bookViewHolder.mBookImage)
+                .placeholder(R.drawable.book)
+                .error(R.drawable.book)
+                .load(url);
+
 
     }
 
@@ -76,11 +86,13 @@ public class BookViewAdapter extends RecyclerView.Adapter<BookViewAdapter.BookVi
     class BookViewHolder extends RecyclerView.ViewHolder{
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
+        private ImageView mBookImage;
 
         public BookViewHolder(@NonNull final View itemView) {
             super(itemView);
             mTitleTextView = itemView.findViewById(R.id.itemview_Title);
             mAuthorTextView= itemView.findViewById(R.id.itemview_Author);
+            mBookImage = itemView.findViewById(R.id.book_image);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
