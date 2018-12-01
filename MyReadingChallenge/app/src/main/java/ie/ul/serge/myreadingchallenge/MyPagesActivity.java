@@ -54,7 +54,7 @@ public class MyPagesActivity extends AppCompatActivity {
         }
 
         mMonthStart = new GregorianCalendar();
-        mMonthStart.set(Calendar.DAY_OF_MONTH,1);
+        mMonthStart.set(Calendar.DAY_OF_MONTH,0);
         mWeekStart= new GregorianCalendar();
         mWeekStart.set(Calendar.DAY_OF_WEEK, mWeekStart.getFirstDayOfWeek());
         mToday = new GregorianCalendar();

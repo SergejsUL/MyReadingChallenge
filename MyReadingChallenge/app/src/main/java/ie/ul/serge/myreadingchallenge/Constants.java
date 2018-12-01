@@ -1,5 +1,7 @@
 package ie.ul.serge.myreadingchallenge;
 
+import java.net.URL;
+
 public class Constants {
     public static final String BOOK_COLLECTION = "books";
     public static final String USERS_COLLECTION = "users";
@@ -17,6 +19,7 @@ public class Constants {
     public static final String KEY_BOOK_AUTHOR="author";
     public static final String KEY_BOOK_TITLE="title";
     public static final String KEY_BOOK_PAGES="pages";
+    public static final String KEY_BOOK_IMAGE_URL = "image_url";
 
 
 
