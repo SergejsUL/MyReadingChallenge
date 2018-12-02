@@ -8,5 +8,8 @@
     <color name="TotalPages">#ff6940</color>
     <color name="MyPagesBackground">#1e1b1a</color>
     <color name="white">#ffffff</color>
+    <color name="black">#060606</color>
+    <color name="grey">#ede1e1</color>
+
 
 </resources>

@@ -1,11 +1,13 @@
 package ie.ul.serge.myreadingchallenge;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,12 +23,28 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
     private FirebaseAuth mAuth;
+    private TextView mForgotPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     mEmailEditText = findViewById(R.id.email_edittext);
     mPasswordEditText=findViewById(R.id.password_edittext);
+    mForgotPass = findViewById(R.id.reset_password_Textview);
+
+    //set action to reset password option.
+    mForgotPass.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Context context = LoginActivity.this;
+            Intent intent = new Intent(context,ResetPassword.class);
+            context.startActivity(intent);
+
+        }
+    });
+
+
     mAuth=FirebaseAuth.getInstance();
 
     // CHECK IF USER IS ALREADY LOGGED IN AND SKIP LOGIN.

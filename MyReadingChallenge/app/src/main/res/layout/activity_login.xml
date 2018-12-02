@@ -75,5 +75,14 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:onClick="handleSignUp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/reset_password_Textview"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_password"
+        android:textSize="20dp"
+        android:textColor="@color/grey"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
