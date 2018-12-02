@@ -55,10 +55,14 @@ public class MyPagesActivity extends AppCompatActivity {
 
         mMonthStart = new GregorianCalendar();
         mMonthStart.set(Calendar.DAY_OF_MONTH,0);
+
         mWeekStart= new GregorianCalendar();
         mWeekStart.set(Calendar.DAY_OF_WEEK, mWeekStart.getFirstDayOfWeek());
+
         mToday = new GregorianCalendar();
-        mToday.add(mToday.DATE,-1);
+        mToday.add(mToday.DATE,0);
+
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -86,16 +90,31 @@ public class MyPagesActivity extends AppCompatActivity {
     private void getPages() {
 
 
+//        for (DocumentSnapshot doc : mUserPageList) {
+//            Date docDate = (Date) doc.get(Constants.KEY_CREATED);
+//
+//            if(docDate.after(mToday.getTime())){
+//                mTodayPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
+//            }
+//            if(docDate.after(mWeekStart.getTime())){
+//                mWeekPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
+//            }
+//            if(docDate.after(mMonthStart.getTime())){
+//                mMonthPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
+//
+//            }
+//        }
+
         for (DocumentSnapshot doc : mUserPageList) {
             Date docDate = (Date) doc.get(Constants.KEY_CREATED);
 
-            if(docDate.after(mToday.getTime())){
+            if(docDate.after(getDateWithoutTimeUsingCalendar(mToday))){
                 mTodayPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
             }
-            if(docDate.after(mWeekStart.getTime())){
+            if(docDate.after(getDateWithoutTimeUsingCalendar(mWeekStart))){
                 mWeekPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
             }
-            if(docDate.after(mMonthStart.getTime())){
+            if(docDate.after(getDateWithoutTimeUsingCalendar(mMonthStart))){
                 mMonthPages+= (Long) doc.get(Constants.KEY_BOOK_PAGES);
 
             }
@@ -124,5 +143,15 @@ public class MyPagesActivity extends AppCompatActivity {
         if(item.getItemId()==android.R.id.home){
             finish();}
         return super.onOptionsItemSelected(item);
+    }
+
+    public  Date getDateWithoutTimeUsingCalendar(Calendar calendar) {
+
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime();
     }
 }
