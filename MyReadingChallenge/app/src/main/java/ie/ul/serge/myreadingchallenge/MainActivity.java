@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
    BookShelf mBookShelf = new BookShelf();
     List<DocumentSnapshot> mUserPageList = new ArrayList<>();
+    Context context = MainActivity.this;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -48,47 +49,18 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_challenge:
-                    Context context = MainActivity.this;
                     Intent intent = new Intent(context,ChellengeActivity.class);
                     context.startActivity(intent);
 
                     return true;
                 case R.id.navigation_pages:
-                    Context context1 = MainActivity.this;
-                    Intent intent1 = new Intent(context1,MyPagesActivity.class);
-                    context1.startActivity(intent1);
+                    Intent intentMyPages = new Intent(context,MyPagesActivity.class);
+                    context.startActivity(intentMyPages);
 
                     return true;
                 case R.id.navigation_me:
-                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                    String uid = mAuth.getCurrentUser().getUid();
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
-                    CollectionReference userPagesCollectionRef = db.collection(Constants.USERS_COLLECTION)
-                            .document(uid).collection(Constants.PAGES_COLLECTION);
-
-                    userPagesCollectionRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                        @Override
-                        public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                            if(e!=null){
-                                Toast.makeText(MainActivity.this,"Could not connect",Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                            mUserPageList =  documentSnapshots.getDocuments();
-                            long totalPages=0;
-                            for(DocumentSnapshot doc : mUserPageList){
-
-                                totalPages+= (Long)doc.get(Constants.KEY_BOOK_PAGES);
-
-                            }
-                            Toast.makeText(MainActivity.this,"Nr Pages: "+ totalPages,Toast.LENGTH_SHORT).show();
-//                            DocumentSnapshot doc2snap = mUserPageList.get(2);
-//                            long text = (long)doc2snap.get(Constants.KEY_BOOK_PAGES);
-//                            Toast.makeText(MainActivity.this,"Document2 number of pages: "+ text,Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                    Intent intentAboutMe = new Intent(context,UserDetails.class);
+                    context.startActivity(intentAboutMe);
                     return true;
             }
             return false;

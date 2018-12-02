@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".BookDetail"
-    tools:showIn="@layout/activity_book_detail">
+    tools:showIn="@layout/activity_book_detail"
+    android:background="@drawable/bookview_background">
 
 
     <TextView
@@ -49,7 +50,7 @@
         android:layout_toRightOf="@+id/book_image"
         android:text="10"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_green_light"
+        android:textColor="@android:color/black"
         android:textSize="40dp"
         />
 
@@ -81,6 +82,7 @@
         android:layout_below="@+id/input_number_picker"
         android:layout_centerHorizontal="true"
         android:text="Add pages"
+
         />
 
     />

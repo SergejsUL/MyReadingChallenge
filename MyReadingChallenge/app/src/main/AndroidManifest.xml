@@ -31,7 +31,11 @@
             android:name=".ChellengeActivity"
             android:label="@string/title_activity_chellenge"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MyPagesActivity"></activity>
+        <activity android:name=".MyPagesActivity" />
+        <activity
+            android:name=".UserDetails"
+            android:label="@string/title_activity_user_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
