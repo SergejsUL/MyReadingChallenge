@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:paddingTop="20dp"
+        android:padding="20dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/cud_user_imageView"
