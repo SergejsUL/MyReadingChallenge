@@ -11,6 +11,8 @@
     <string name="action_sign_up">Register New User</string>
     <string name="invalid_email">This email address is invalid</string>
     <string name="invalid_password">Password is too short</string>
+    <string name="invalid_name">Invalid Name</string>
+
     <string name="login_screen_title">login</string>
     <string name="sign_out">Sign out</string>
     <string name="title_activity_book_detail">BookDetail</string>

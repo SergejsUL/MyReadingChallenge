@@ -124,7 +124,8 @@
         android:textStyle="bold"
         android:gravity="center"
         android:layout_gravity="center"
-        android:background="@drawable/input_text_custom"/>
+        android:background="@drawable/input_text_custom"
+        android:onClick="handleRegister"/>
         </LinearLayout>
 
     </ScrollView>

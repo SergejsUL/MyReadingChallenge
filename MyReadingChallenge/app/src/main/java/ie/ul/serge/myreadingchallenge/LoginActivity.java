@@ -101,32 +101,32 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
         }else {
-        mAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                           String uid= mAuth.getUid();
-
-                            CollectionReference userColRef = FirebaseFirestore.getInstance()
-                                    .collection(Constants.USERS_COLLECTION);
-                            HashMap<String, Object> user = new HashMap<>();
-                            String name = mAuth.getCurrentUser().getEmail();
-                            user.put(Constants.KEY_USERNAME,name);
-                            user.put(Constants.KEY_BOOK_PAGES,0);
-                            user.put(Constants.KEY_USERID,uid);
-                            userColRef.document(uid).set(user);
-
-
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            startActivity(intent);
-
-                        }else{
-                            Toast.makeText(LoginActivity.this,"Sign up failed!",Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
+//        mAuth.createUserWithEmailAndPassword(email,password)
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if(task.isSuccessful()){
+//                           String uid= mAuth.getUid();
+//
+//                            CollectionReference userColRef = FirebaseFirestore.getInstance()
+//                                    .collection(Constants.USERS_COLLECTION);
+//                            HashMap<String, Object> user = new HashMap<>();
+//                            String name = mAuth.getCurrentUser().getEmail();
+//                            user.put(Constants.KEY_USERNAME,name);
+//                            user.put(Constants.KEY_BOOK_PAGES,0);
+//                            user.put(Constants.KEY_USERID,uid);
+//                            userColRef.document(uid).set(user);
+//
+//
+//                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+//                            startActivity(intent);
+//
+//                        }else{
+//                            Toast.makeText(LoginActivity.this,"Sign up failed!",Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                    }
+//                });
     }
 
     }

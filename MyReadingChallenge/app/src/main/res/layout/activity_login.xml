@@ -94,6 +94,7 @@
         android:textSize="20sp"
         android:textColor="@color/grey"
         android:layout_gravity="center"
+        android:clickable="true"
         android:onClick="handleRegister"/>
 
 </LinearLayout>
