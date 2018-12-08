@@ -65,24 +65,35 @@
         android:textStyle="bold"
         android:onClick="handleSignIn"/>
 
-    <Button
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/action_sign_up"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:onClick="handleSignUp"/>
+    <!--<Button-->
+        <!--style="?android:textAppearanceSmall"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:background="@color/colorPrimaryDark"-->
+        <!--android:text="@string/action_sign_up"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textStyle="bold"-->
+        <!--android:onClick="handleSignUp"/>-->
     <TextView
         android:layout_width="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/reset_password_Textview"
         android:layout_height="wrap_content"
         android:text="@string/forgot_password"
         android:textSize="20sp"
         android:textColor="@color/grey"
         android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/register_Textview"
+        android:layout_height="wrap_content"
+        android:text="@string/register_new_user"
+        android:textSize="20sp"
+        android:textColor="@color/grey"
+        android:layout_gravity="center"
+        android:onClick="handleRegister"/>
 
 </LinearLayout>

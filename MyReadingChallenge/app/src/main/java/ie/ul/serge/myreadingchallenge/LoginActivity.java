@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordEditText;
     private FirebaseAuth mAuth;
     private TextView mForgotPass;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     mEmailEditText = findViewById(R.id.email_edittext);
     mPasswordEditText=findViewById(R.id.password_edittext);
     mForgotPass = findViewById(R.id.reset_password_Textview);
+
 
     //set action to reset password option.
     mForgotPass.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     });
 
 
+
     mAuth=FirebaseAuth.getInstance();
 
     // CHECK IF USER IS ALREADY LOGGED IN AND SKIP LOGIN.
@@ -55,6 +59,15 @@ public class LoginActivity extends AppCompatActivity {
 
     }//END OF ON CREATE
 
+
+    //set action to register new user
+
+    public void handleRegister (View view){
+        Context context = LoginActivity.this;
+        Intent intent = new Intent(context,Register.class);
+        context.startActivity(intent);
+
+    }
 
     public void handleSignIn(View view){
         loginAction(true);

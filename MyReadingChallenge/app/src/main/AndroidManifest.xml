@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -32,14 +31,13 @@
             android:name=".ChellengeActivity"
             android:label="@string/title_activity_chellenge"
             android:theme="@style/LimerickReadersTheme" />
-
-        <activity android:name=".MyPagesActivity"
-             />
+        <activity android:name=".MyPagesActivity" />
         <activity
             android:name=".UserDetails"
             android:label="@string/title_activity_user_details"
             android:theme="@style/LimerickReadersTheme" />
-        <activity android:name=".ResetPassword"></activity>
+        <activity android:name=".ResetPassword" />
+        <activity android:name=".Register"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Register"
+    android:background="@drawable/bookview_background">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:text="@string/name"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="15dp"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@drawable/input_text_custom"
+        android:gravity="center"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="@string/prompt_email"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/email_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="15dp"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@drawable/input_text_custom"
+        android:gravity="center"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="@string/prompt_password"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/password_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:maxLines="1"
+         android:singleLine="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/input_text_custom"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="@string/prompt_date_of_birth"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+    <CalendarView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </CalendarView>
+
+
+    <Button
+        style="?android:textAppearanceSmall"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:paddingHorizontal="40dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/register"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="@drawable/input_text_custom"/>
+
+</LinearLayout>
