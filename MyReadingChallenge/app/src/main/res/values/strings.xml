@@ -34,4 +34,6 @@
     <string name="welcome_to_reading_challenge">Welcome to reading challenge</string>
     <string name="age">Age</string>
     <string name="awards">Awards</string>
+    <string name="pages_added">Pages added: %d</string>
+    <string name="pages_log_cancelled">Last pages log cancelled</string>
 </resources>

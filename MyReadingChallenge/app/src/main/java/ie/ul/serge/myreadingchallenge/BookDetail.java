@@ -9,6 +9,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.constraint.solver.widgets.Snapshot;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -162,9 +163,34 @@ public class BookDetail extends AppCompatActivity {
                 addPagestoBook();
                 addPagesToChallenge();
                 addPages();
+                makeSnackbar();
 
             }
         });
+    }
+
+    private void makeSnackbar() {
+        String text = getString(R.string.pages_added,mPagestoAdd);
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.book_detail_coordinator_layout),text
+               ,Snackbar.LENGTH_LONG);
+        snackbar.setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        mBookPages -=mPagestoAdd;
+                        mUserPages-=mPagestoAdd;
+                        mPagestoAdd = 0-mPagestoAdd;
+                        addPagestoBook();
+                        addPagesToChallenge();
+                        addPages();
+
+                        Toast.makeText(BookDetail.this,
+                                R.string.pages_log_cancelled,Toast.LENGTH_LONG).show();
+
+                    }
+                });
+        snackbar.show();
+
     }
 
     private void addPages() {
