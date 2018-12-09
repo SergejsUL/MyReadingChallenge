@@ -7,7 +7,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".UserDetails"
     tools:showIn="@layout/activity_user_details"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bookview_background"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="6dp">
+
 
     <ImageView
         android:padding="20dp"
@@ -19,27 +27,65 @@
 
         />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cud_userNameTextview"
         android:textSize="20dp"
-        android:text="Name:"
-        android:paddingLeft="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cud_userAgeTextview"
-        android:textSize="20dp"
-        android:text="Age:"
-        android:paddingLeft="10dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cud_userRankTextview"
-        android:textSize="20dp"
-        android:text="Ranbk:"
-        android:paddingLeft="10dp"/>
+        android:text="@string/name"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cud_userNameTextview"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:background="@drawable/input_text_custom"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="@string/age"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cud_userAgeTextview"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:background="@drawable/input_text_custom"/>
+
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="@string/awards"
+        android:gravity="center"
+        android:textColor="@color/white"
+            android:layout_marginTop="15dp"/>
+
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:paddingHorizontal="6dp"
+
+
+            />
+
+        />
+
+    </LinearLayout>
 
 </LinearLayout>

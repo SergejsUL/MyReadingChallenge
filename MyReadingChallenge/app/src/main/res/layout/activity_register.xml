@@ -105,16 +105,16 @@
 
     </CalendarView>
 
-     <ImageView
-         android:layout_width="150dp"
-         android:layout_height="150dp"
-         android:layout_margin="15dp"
-         android:background="@drawable/input_text_custom"
-         android:layout_gravity="center"
-         android:src="@drawable/user_new"
-         android:clickable="true"
-         android:onClick="setUserPic"
-         android:id="@+id/user_picture_imageview"/>
+     <!--<ImageView-->
+         <!--android:layout_width="150dp"-->
+         <!--android:layout_height="150dp"-->
+         <!--android:layout_margin="15dp"-->
+         <!--android:background="@drawable/input_text_custom"-->
+         <!--android:layout_gravity="center"-->
+         <!--android:src="@drawable/user_new"-->
+         <!--android:clickable="true"-->
+         <!--android:onClick="setUserPic"-->
+         <!--android:id="@+id/user_picture_imageview"/>-->
 
     <Button
         style="?android:textAppearanceSmall"

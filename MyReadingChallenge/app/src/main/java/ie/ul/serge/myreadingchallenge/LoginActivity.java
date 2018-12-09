@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,11 +21,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
+//
+
+
+
 public class LoginActivity extends AppCompatActivity {
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
     private FirebaseAuth mAuth;
     private TextView mForgotPass;
+
+
+
 
 
     @Override
@@ -33,6 +42,11 @@ public class LoginActivity extends AppCompatActivity {
     mEmailEditText = findViewById(R.id.email_edittext);
     mPasswordEditText=findViewById(R.id.password_edittext);
     mForgotPass = findViewById(R.id.reset_password_Textview);
+
+
+
+//        ImageView imageView = (ImageView) findViewById(R.id.animated_book_image);
+//        String url = "https://firebasestorage.googleapis.com/v0/b/limerickreaders.appspot.com/o/res%2Fanimated-book-image.gif?alt=media&token=e1197325-8210-423c-9c00-099009b4c75d";
 
 
     //set action to reset password option.

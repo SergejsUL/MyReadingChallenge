@@ -31,4 +31,7 @@
     <string name="register">Register</string>
     <string name="prompt_date_of_birth">Date of Birth</string>
     <string name="pick_date">Pick Date</string>
+    <string name="welcome_to_reading_challenge">Welcome to reading challenge</string>
+    <string name="age">Age</string>
+    <string name="awards">Awards</string>
 </resources>

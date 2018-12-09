@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ public class Register extends AppCompatActivity {
 
     CalendarView mExpandableCallendar;
     TextView mShowCallendar,mNameTextView,mEmailTextview,mPasswordTextview;
-    ImageView mUserImageview;
+//    ImageView mUserImageview;
     FirebaseFirestore mDB;
     FirebaseAuth mAuth;
     StorageReference mStorageRef;
@@ -49,6 +50,11 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         //mDownloadURL = Uri.parse("no uri");
 
         mAuth=FirebaseAuth.getInstance();
@@ -60,7 +66,7 @@ public class Register extends AppCompatActivity {
         mNameTextView=findViewById(R.id.name_edittext);
         mEmailTextview=findViewById(R.id.email_edittext);
         mPasswordTextview=findViewById(R.id.password_edittext);
-        mUserImageview = findViewById(R.id.user_picture_imageview);
+//        mUserImageview = findViewById(R.id.user_picture_imageview);
         mDOB = new GregorianCalendar();
 
 
@@ -231,4 +237,11 @@ public class Register extends AppCompatActivity {
 //        }
 //    }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();}
+        return super.onOptionsItemSelected(item);
+    }
 }
