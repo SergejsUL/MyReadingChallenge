@@ -52,6 +52,7 @@ public class UserDetails extends AppCompatActivity {
         mName = findViewById(R.id.cud_userNameTextview);
         mAge=findViewById(R.id.cud_userAgeTextview);
         mUserPic=findViewById(R.id.cud_user_imageView);
+        mRating = findViewById(R.id.ratingBar);
 
         mDB = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -68,8 +69,14 @@ public class UserDetails extends AppCompatActivity {
                     makeMeToast("Failed to connect to Database. Working offline");
                     return;
                 }
+                //Get name and Rating
+                String userName = (String) documentSnapshot.get(Constants.KEY_USERNAME);
 
-              String userName = (String) documentSnapshot.get(Constants.KEY_USERNAME);
+                long pages =(long) documentSnapshot.get(Constants.KEY_BOOK_PAGES);
+                String x = pages +"";
+
+                Float rating =(Float.parseFloat(x)/100);
+                makeMeToast(rating+"");
 
                 //Calculate and display age
 
@@ -79,8 +86,10 @@ public class UserDetails extends AppCompatActivity {
 
                 mAge.setText( Helper.calculateAge(dbDate,today)+"");
                 mName.setText(userName);
+               mRating.setRating(rating);
 
-                
+
+
             }
         });
 
