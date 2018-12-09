@@ -129,7 +129,8 @@ public class MyPagesActivity extends AppCompatActivity {
         mTextViewMnthPg = findViewById(R.id.read_month_textview);
         mReadTopBanner=findViewById(R.id.read_top_banner);
 
-        String bannerText = "Hello " + mAuth.getCurrentUser().getEmail()+". \nYou are mmaking great progress this year." +
+        String usetName =(String) mAuth.getCurrentUser().getDisplayName();
+        String bannerText = "Hello " +usetName +". \nGood luck with your challenge." +
                 "\nSee your reading stats below";
 
         mReadTopBanner.setText(bannerText);

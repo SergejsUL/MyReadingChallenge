@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -127,6 +129,8 @@ public class Register extends AppCompatActivity {
                         if(task.isSuccessful()){
                             mUid= mAuth.getUid();
 
+
+
                             updateUserProfile();
 
 
@@ -160,6 +164,12 @@ public class Register extends AppCompatActivity {
         String name = mNameTextView.getText().toString();
         String picURL = "URL";
         GregorianCalendar dob = mDOB;
+//Update uset name in user profile
+        FirebaseUser user = mAuth.getCurrentUser();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name).build();
+                user.updateProfile(profileUpdates);
+
 
         mNewUser= new User(name,dob,mUid,picURL);
 
